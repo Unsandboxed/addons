@@ -3,8 +3,6 @@
  * and provides a more friendly way to create instances blocks with some inputs.
  */
 
-import * as SABlocks from "../../addon-api/content-script/blocks.js";
-
 /**
  * A numeric value to represent the type of an {@link BlockInput}
  * @readonly
@@ -345,7 +343,7 @@ export class BlockTypeInfo {
     let name;
 
     if (block.type === "procedures_call") {
-      if (SABlocks.getCustomBlock(block.getProcCode())) name = "addon-custom-block";
+      if (vm.getAddonBlock(block.getProcCode())) name = "addon-custom-block";
       else name = "more";
     } else if (block.isScratchExtension) name = "pen";
     else if (block.type === "sensing_of") name = "sensing";

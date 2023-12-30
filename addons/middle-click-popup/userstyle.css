@@ -15,13 +15,6 @@
 
   z-index: 999;
 }
-[theme="dark"] input.s3devInp {
-  color: #eee;
-  background: #3333;
-}
-[theme="dark"] input.s3devInp:hover {
-  background: #333;
-}
 
 .sa-mcp-container {
   display: flex;
@@ -103,9 +96,6 @@
   width: 100%;
   fill: transparent;
   cursor: grab;
-}
-[theme="dark"] #s3devFloatingBar {
-  background-color: #111;
 }
 
 .sa-mcp-preview-block {

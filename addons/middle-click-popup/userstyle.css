@@ -23,7 +23,8 @@
   z-index: 100;
   position: absolute;
   box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.3);
-  background-color: white;
+  background-color: var(--ui-modal-background);
+  outline: 1px solid var(--ui-black-transparent);
   border: none;
   border-radius: 4px;
 }

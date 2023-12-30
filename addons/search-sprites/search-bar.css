@@ -9,7 +9,7 @@ input.sa-search-sprites-box {
   box-sizing: border-box;
   background-color: transparent;
   border: 0px;
-  border-bottom: 1px solid hsla(0, 0%, 1%, 0.15);
+  border-bottom: 1px solid var(--ui-black-transparent);
   outline: none;
   padding: 5px 20px 5px 10px;
 }

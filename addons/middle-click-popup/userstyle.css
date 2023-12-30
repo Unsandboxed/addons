@@ -7,7 +7,7 @@
 
   position: absolute;
   min-width: 100px;
-  background-color: white;
+  background-color: var(--ui-modal-background);
   border-radius: 4px;
   box-shadow:
     rgba(0, 0, 0, 0.3) 0 0 3px,

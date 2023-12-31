@@ -178,7 +178,7 @@
   left: 25%;
   width: 50%;
   height: 50%;
-  background-image: url("./close-s3.svg");
+  background-image: url("./close.svg");
   transform: rotate(45deg);
   filter: var(--editorDarkMode-primary-filter, none);
 }

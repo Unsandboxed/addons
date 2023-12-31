@@ -18,12 +18,14 @@
   ],
   "settings": [
     {
+      "dynamic": true,
       "name": "Text inputs",
       "id": "text",
       "type": "boolean",
       "default": true
     },
     {
+      "dynamic": true,
       "name": "Color inputs",
       "id": "color",
       "type": "boolean",

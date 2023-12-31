@@ -3,7 +3,7 @@
   "noTranslations": true,
   "name": "Compact editor",
   "description": "Decreases the size of buttons, input fields, the menu bar, and other elements in the editor, making more space for components such as the code area, the costume editor, and costume previews, as was the case in Scratch 2.0.",
-  "tags": ["editor", "theme", "featured"],
+  "tags": ["editor", "theme", "featured", "beta"],
   "credits": [
     {
       "name": "lisa_wolfgang",

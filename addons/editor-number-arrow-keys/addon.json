@@ -18,6 +18,7 @@
   ],
   "settings": [
     {
+      "dynamic": true,
       "name": "Change on regular key press",
       "id": "regular",
       "type": "select",
@@ -47,6 +48,7 @@
       "if": { "settings": { "useCustom": false } }
     },
     {
+      "dynamic": true,
       "name": "Change on regular key press",
       "id": "regularCustom",
       "type": "untranslated",
@@ -55,6 +57,7 @@
       "if": { "settings": { "useCustom": true } }
     },
     {
+      "dynamic": true,
       "name": "Change on Shift+Key",
       "id": "shift",
       "type": "select",
@@ -85,6 +88,7 @@
     },
 
     {
+      "dynamic": true,
       "name": "Change on Shift+Key",
       "id": "shiftCustom",
       "type": "untranslated",
@@ -93,6 +97,7 @@
       "if": { "settings": { "useCustom": true } }
     },
     {
+      "dynamic": true,
       "name": "Change on Alt+Key",
       "id": "alt",
       "type": "select",
@@ -123,6 +128,7 @@
     },
 
     {
+      "dynamic": true,
       "name": "Change on Alt+Key",
       "id": "altCustom",
       "type": "untranslated",
@@ -132,6 +138,7 @@
     },
 
     {
+      "dynamic": true,
       "name": "Use custom values",
       "id": "useCustom",
       "type": "boolean",

@@ -873,4 +873,9 @@ export default class Tab extends Listenable {
   prompt(title, message, defaultValue, opts) {
     return modal.prompt(this, title, message, defaultValue, opts);
   }
+
+  // TW - just a stub so that the addons don't break, makes testing easier
+  recolorable () {
+    return document.createElement('img');
+  }
 }

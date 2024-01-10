@@ -303,19 +303,6 @@ export default async function ({ addon, console, msg }) {
     }
   };
 
-  // TODO compat in main
-  //   for (const category of categories) {
-  //     // CSS variables are used for compatibility with other addons
-  //     const prefix = `--editorTheme3-${category.colorId}`;
-  //     for (const [name, value] of Object.entries({
-  //       primary: primaryColor(category),
-  //       secondary: secondaryColor(category),
-  //       tertiary: tertiaryColor(category),
-  //       field: fieldBackground(category),
-  //     })) {
-  //       document.documentElement.style.setProperty(`${prefix}-${name}`, value);
-  //     }
-
   const oldFieldVerticalSeparatorInit = Blockly.FieldVerticalSeparator.prototype.init;
   Blockly.FieldVerticalSeparator.prototype.init = function () {
     oldFieldVerticalSeparatorInit.call(this);

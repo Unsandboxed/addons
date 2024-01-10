@@ -92,8 +92,8 @@
 }
 
 .sa-block-color-addon-custom-block {
-  --sa-block-background-primary: var(--editorTheme3-sa-primary, #29beb8);
-  --sa-block-background-secondary: var(--editorTheme3-sa-secondary, #3aa8a4);
-  --sa-block-background-tertiary: var(--editorTheme3-sa-tertiary, #3aa8a4);
-  --sa-block-field-background: var(--editorTheme3-sa-field, #3aa8a4);
+  --sa-block-background-primary: var(--editorTheme3-addons-primary, #29beb8);
+  --sa-block-background-secondary: var(--editorTheme3-addons-secondary, #3aa8a4);
+  --sa-block-background-tertiary: var(--editorTheme3-addons-tertiary, #3aa8a4);
+  --sa-block-field-background: var(--editorTheme3-addons-field, #3aa8a4);
 }

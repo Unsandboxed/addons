@@ -1,4 +1,6 @@
 {
+  "editorOnly": true,
+  "noTranslations": true,
   "name": "Rearrangeable custom block inputs",
   "description": "Adds buttons for rearranging custom block inputs.",
   "credits": [

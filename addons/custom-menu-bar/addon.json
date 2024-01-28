@@ -21,10 +21,6 @@
   ],
   "info": [
     {
-      "id": "tutorials-button-update",
-      "text": "The \"Hide Tutorials button\" addon has been moved here as a setting."
-    },
-    {
       "type": "notice",
       "id": "small-screens",
       "text": "The text labels may be automatically replaced by icons on smaller windows."
@@ -51,24 +47,6 @@
         }
       ],
       "default": "both"
-    },
-    {
-      "name": "Hide Tutorials button",
-      "id": "hide-tutorials-button",
-      "type": "boolean",
-      "default": false
-    },
-    {
-      "name": "Hide My Stuff button",
-      "id": "my-stuff",
-      "type": "boolean",
-      "default": false
-    },
-    {
-      "name": "Compact user dropdown",
-      "id": "compact-username",
-      "type": "boolean",
-      "default": false
     }
   ],
   "userscripts": [
@@ -78,24 +56,6 @@
     }
   ],
   "userstyles": [
-    {
-      "url": "my-stuff-hide.css",
-      "matches": ["projects"],
-      "if": {
-        "settings": {
-          "my-stuff": true
-        }
-      }
-    },
-    {
-      "url": "username.css",
-      "matches": ["projects"],
-      "if": {
-        "settings": {
-          "compact-username": true
-        }
-      }
-    },
     {
       "url": "menu-icons.css",
       "matches": ["projects"],
@@ -111,15 +71,6 @@
       "if": {
         "settings": {
           "menu-labels": "labels"
-        }
-      }
-    },
-    {
-      "url": "tutorials-hide.css",
-      "matches": ["projects"],
-      "if": {
-        "settings": {
-          "hide-tutorials-button": true
         }
       }
     }

@@ -49,12 +49,6 @@
       "default": "both"
     }
   ],
-  "userscripts": [
-    {
-      "url": "username.js",
-      "matches": ["projects"]
-    }
-  ],
   "userstyles": [
     {
       "url": "menu-icons.css",

@@ -3,12 +3,11 @@
   "description": "Allows you to hide specific editor menu bar items or remove their labels or icons.",
   "credits": [
     {
-      "name": "philipp2007",
-      "link": "https://ggigabyte.repl.co/"
+      "name": "philipp2007"
     },
     {
       "name": "CST1229",
-      "link": "https://github.com/CST1229/",
+      "link": "https://scratch.mit.edu/users/CST1229/",
       "note": "compact user dropdown",
       "id": "dropdown"
     },
@@ -29,6 +28,7 @@
   "tags": ["editor", "editorMenuBar", "featured"],
   "settings": [
     {
+      "dynamic": true,
       "name": "Show menu...",
       "id": "menu-labels",
       "type": "select",

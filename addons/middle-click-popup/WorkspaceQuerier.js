@@ -1159,7 +1159,7 @@ export default class WorkspaceQuerier {
   /**
    * The maximum number of results to find before we give up searching sub-blocks.
    */
-  static MAX_RESULTS = 1000;
+  static MAX_RESULTS = 2000;
 
   /**
    * The maximum number of tokens to find before giving up.

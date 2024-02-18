@@ -98,7 +98,7 @@ export default async function createPerformanceTab({ debug, addon, console, msg 
       animation: fancyGraphs,
       scales: {
         y: {
-          max: 300,
+          suggestedMax: 300,
           min: 0,
         },
       },

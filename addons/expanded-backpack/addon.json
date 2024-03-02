@@ -3,8 +3,7 @@
   "description": "Arranges the contents of the editor backpack into an expandable two-way grid, similar to the costume library and increases the size of certain thumbnails.",
   "credits": [
     {
-      "name": "pumpkinhasapatch",
-      "link": "https://github.com/pumpkinhasapatch"
+      "name": "pumpkinhasapatch"
     }
   ],
   "versionAdded": "1.31.0",
@@ -12,6 +11,7 @@
   "enabledByDefault": false,
   "settings": [
     {
+      "dynamic": true,
       "name": "Number of displayed rows",
       "id": "rows",
       "type": "integer",
@@ -20,6 +20,7 @@
       "default": 2
     },
     {
+      "dynamic": true,
       "name": "Larger costume and script thumbnails",
       "id": "upscale",
       "type": "boolean",
@@ -47,7 +48,7 @@
           "type": "settingValue",
           "settingId": "upscale"
         },
-        "true": "white",
+        "true": "var(--ui-white)",
         "false": "transparent"
       }
     }

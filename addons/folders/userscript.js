@@ -1,35 +1,4 @@
-export default async function ({ addon, console, msg }) {
-  // The basic premise of how this addon works is relative simple.
-  // scratch-gui renders the sprite selectors and asset selectors in a hierarchy like this:
-  // <SelectorHOC>
-  //   <SpriteSelectorItem />
-  //   <SpriteSelectorItem />
-  //   <SpriteSelectorItem />
-  //   <SpriteSelectorItem />
-  //   ...
-  // </SelectorHOC>
-  // It's obviously more complicated than that, but there are two important parts:
-  // SelectorHOC - We override this to change which items are displayed
-  // SpriteSelectorItem - We override this to change how items are displayed.
-  //    Folders are just items rendered differently
-  // These two components communicate through the `name` property of the items.
-  // We touch some things on the VM to make dragging items work properly.
-
-  const REACT_INTERNAL_PREFIX = "__reactInternalInstance$";
-
-  const TYPE_SPRITES = 1;
-  const TYPE_ASSETS = 2;
-
-  // We run too early, will be set later
-  let vm;
-
-  let reactInternalKey;
-
-  let currentSpriteFolder;
-  let currentAssetFolder;
-
-  let currentSpriteItems;
-  let currentAssetItems;
+import { escapeHTML } from "../../libraries/common/cs/autoescaper.js";
 
   const DIVIDER = "//";
 
@@ -80,7 +49,55 @@ export default async function ({ addon, console, msg }) {
     if (name === "") return "2";
     if (RESERVED_NAMES.includes(name)) return `${name}2`;
     return name;
-  };
+};
+
+let currentSpriteFolder = null;
+let currentAssetFolder = null;
+
+/**
+ * Used for compatibility with other addons that trap the add costume or add sound functions.
+ * By default new assets are added to the folder that the user currently has open. This gets
+ * encoded in the name of the asset, but that information may not be added until late in the
+ * process. If you want to guarantee that your addon is aware of the asset name after
+ * accounting for folders, then pass it into this function. The asset will be modified in-place.
+ * It is safe to call this multiple times with the same asset.
+ * @param {{name: string}} asset a sound or costume asset
+ */
+export const addDefaultAssetFolderIfMissing = (asset) => {
+  if (asset && currentAssetFolder !== null && typeof getFolderFromName(asset.name) !== "string") {
+    asset.name = setFolderOfName(asset.name, currentAssetFolder);
+  }
+};
+
+export default async function ({ addon, console, msg }) {
+  // The basic premise of how this addon works is relative simple.
+  // scratch-gui renders the sprite selectors and asset selectors in a hierarchy like this:
+  // <SelectorHOC>
+  //   <SpriteSelectorItem />
+  //   <SpriteSelectorItem />
+  //   <SpriteSelectorItem />
+  //   <SpriteSelectorItem />
+  //   ...
+  // </SelectorHOC>
+  // It's obviously more complicated than that, but there are two important parts:
+  // SelectorHOC - We override this to change which items are displayed
+  // SpriteSelectorItem - We override this to change how items are displayed.
+  //    Folders are just items rendered differently
+  // These two components communicate through the `name` property of the items.
+  // We touch some things on the VM to make dragging items work properly.
+
+  const REACT_INTERNAL_PREFIX = "__reactInternalInstance$";
+
+  const TYPE_SPRITES = 1;
+  const TYPE_ASSETS = 2;
+
+  // We run too early, will be set later
+  let vm;
+
+  let reactInternalKey;
+
+  let currentSpriteItems;
+  let currentAssetItems;
 
   const getSortableHOCFromElement = (el) => {
     const nearestSpriteSelector = el.closest("[class*='sprite-selector_sprite-selector']");
@@ -993,12 +1010,7 @@ export default async function ({ addon, console, msg }) {
 
     const originalAddCostume = RenderedTarget.prototype.addCostume;
     RenderedTarget.prototype.addCostume = function (...args) {
-      if (currentAssetFolder !== null) {
-        const costume = args[0];
-        if (costume && typeof getFolderFromName(costume.name) !== "string") {
-          costume.name = setFolderOfName(costume.name, currentAssetFolder);
-        }
-      }
+      addDefaultAssetFolderIfMissing(args[0]);
       const r = originalAddCostume.call(this, ...args);
       fixCostumeOrder(this);
       return r;
@@ -1006,12 +1018,7 @@ export default async function ({ addon, console, msg }) {
 
     const originalAddSound = RenderedTarget.prototype.addSound;
     RenderedTarget.prototype.addSound = function (...args) {
-      if (currentAssetFolder !== null) {
-        const sound = args[0];
-        if (sound && typeof getFolderFromName(sound.name) !== "string") {
-          sound.name = setFolderOfName(sound.name, currentAssetFolder);
-        }
-      }
+      addDefaultAssetFolderIfMissing(args[0]);
       const r = originalAddSound.call(this, ...args);
       fixSoundOrder(this);
       return r;

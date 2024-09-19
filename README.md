@@ -4,8 +4,7 @@ If you're forking TurboWarp and want to make small changes to the addons, modify
 
 <!--
 
-<img src="images/icon.svg" alt="Scratch Addons logo" align="right" width="128px"></img>
-# Scratch Addons
+# <img src="images/icon.svg" alt="Scratch Addons logo" align="right" width="128px"></img>Scratch Addons
 
 [![Chrome Web Store](.github/readme-images/cws-badge.png)](https://chrome.google.com/webstore/detail/fbeffbjdlemaoicjdapfpikkikjoneco)
 [![Firefox Add-ons](.github/readme-images/ff-addon-badge.png)](https://addons.mozilla.org/firefox/addon/scratch-messaging-extension/)

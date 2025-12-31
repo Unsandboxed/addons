@@ -20,10 +20,10 @@ export default async function ({ addon }) {
   }
 
   if (typeof GamepadHapticActuator === 'function' && typeof GamepadHapticActuator.prototype.playEffect === 'function') {
-    const originalPulse = GamepadHapticActuator.prototype.playEffect;
+    const originalPlayEffect = GamepadHapticActuator.prototype.playEffect;
     GamepadHapticActuator.prototype.playEffect = function (...args) {
       if (addon.self.disabled) {
-        return originalPulse.call(this, ...args);
+        return originalPlayEffect.call(this, ...args);
       }
       return Promise.resolve('preempted');
     };

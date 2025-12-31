@@ -1,0 +1,13 @@
+{
+  "noTranslations": true,
+  "name": "Disable vibrations",
+  "description": "Prevents the vibration and gamepad extensions from causing vibrations.",
+  "userscripts": [
+    {
+      "url": "userscript.js",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "tags": ["danger"],
+  "enabledByDefault": false
+}

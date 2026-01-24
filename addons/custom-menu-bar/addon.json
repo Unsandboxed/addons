@@ -26,10 +26,11 @@
     }
   ],
   "tags": ["editor", "editorMenuBar", "featured"],
+  "relatedAddons": ["discuss-button", "editor-compact"],
   "settings": [
     {
       "dynamic": true,
-      "name": "Show menu...",
+      "name": "Menu button appearance",
       "id": "menu-labels",
       "type": "select",
       "potentialValues": [
@@ -73,5 +74,10 @@
   "dynamicEnable": true,
   "updateUserstylesOnSettingsChange": true,
   "enabledByDefault": false,
-  "versionAdded": "1.36.0"
+  "versionAdded": "1.36.0",
+  "latestUpdate": {
+    "version": "1.40.0",
+    "newSettings": ["hide-debug-button"],
+    "isMajor": true
+  }
 }

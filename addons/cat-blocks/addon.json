@@ -18,6 +18,12 @@
       "matches": ["projects"]
     }
   ],
+  "userstyles": [
+    {
+      "url": "style.css",
+      "matches": ["projects"]
+    }
+  ],
   "info": [
     {
       "type": "notice",
@@ -35,6 +41,8 @@
   ],
   "versionAdded": "1.14.0",
   "tags": ["editor", "codeEditor", "theme", "featured"],
-  "enabledByDefault": false,
+  "dynamicEnable": true,
+  "dynamicDisable": true,
+  "relatedAddons": ["custom-block-shape", "editor-theme3"],
   "libraries": ["scratch-blocks"]
 }

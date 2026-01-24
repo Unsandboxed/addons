@@ -24,5 +24,7 @@
   "dynamicDisable": true,
   "versionAdded": "1.7.0",
   "enabledByDefault": true,
-  "tags": ["editor", "projectPlayer", "recommended"]
+  "tags": ["player", "recommended"],
+  "relatedAddons": ["vol-slider"],
+  "libraries": ["scratch-gui"]
 }

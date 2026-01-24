@@ -20,7 +20,14 @@
       "matches": ["projects"]
     }
   ],
+  "userstyles": [
+    {
+      "url": "../../libraries/common/cs/blockly-menu-separators.css",
+      "matches": ["projects"]
+    }
+  ],
   "tags": ["editor", "codeEditor", "recommended"],
+  "relatedAddons": ["middle-click-popup"],
   "settings": [
     {
       "dynamic": true,

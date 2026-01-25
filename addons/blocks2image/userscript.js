@@ -328,7 +328,8 @@ export default async function ({ addon, console, msg }) {
       // This seems to work since the actual positioning is done with translate.
       if (translateY === 0) translateY = Math.abs(g.getBBox().y) * scale + scale;
 
-      g.style.display = ""; // because of TW scratch-blocks changes
+      // TW: compatibility with block hiding optimization
+      g.style.display = "";
     });
 
     translateY -= Math.min(...yArr);

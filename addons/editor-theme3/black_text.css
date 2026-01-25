@@ -1,5 +1,6 @@
 .categoryBubble::after,
 .scratchCategoryItemBubble::after {
+  /* block-palette-icons */
   filter: brightness(0);
 }
 

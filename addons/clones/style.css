@@ -26,15 +26,15 @@
   filter: var(--editorDarkMode-page-purpleIconFilter, none);
 }
 
-.clone-container-container[data-count="none"] {
+.clone-container-container[data-count="0"] {
   display: none;
 }
 
-.clone-container-container[data-count="full"] {
+.clone-container-container[data-count="300"] {
   color: var(--editorDarkMode-page-pinkText, #ff3355);
 }
 
-.clone-container-container[data-count="full"] .clone-icon {
+.clone-container-container[data-count="300"] .clone-icon {
   background-image: url("./300cats.svg");
   filter: var(--editorDarkMode-page-pinkIconFilter, none);
 }

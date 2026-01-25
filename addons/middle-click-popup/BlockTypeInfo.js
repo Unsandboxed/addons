@@ -3,6 +3,11 @@
  * and provides a more friendly way to create instances blocks with some inputs.
  */
 
+// TW: switched to VM addon block API instead of this import
+/*
+import * as SABlocks from "../../addon-api/content-script/blocks.js";
+*/
+
 /**
  * A numeric value to represent the type of an {@link BlockInput}
  * @readonly
@@ -207,6 +212,7 @@ export class BlockInputEnum extends BlockInput {
     this.values = [];
     for (let i = 0; i < options.length; i++) {
       if (typeof options[i][1] === "string" && BlockInputEnum.INVALID_VALUES.indexOf(options[i][1]) === -1) {
+        // TW: avoid replaceAll for browser support reasons
         this.values.push({ value: options[i][1], string: options[i][0].replace(/\u00a0/g, " ") });
       }
     }
@@ -343,8 +349,10 @@ export class BlockTypeInfo {
     let name;
 
     if (block.type === "procedures_call") {
+      // TW: use VM API instead of the SABlocks import
       if (vm.getAddonBlock(block.getProcCode())) name = "addon-custom-block";
       else name = "more";
+      // TW: changed extension for indicating default colors
     } else if (block.usesDefaultExtensionColors) name = "pen";
     else if (block.type === "sensing_of") name = "sensing";
     else if (block.type === "event_whenbackdropswitchesto") name = "events";

@@ -397,9 +397,10 @@ export default async function ({ addon, console, msg }) {
         const [x, y] = PREVIEW_POSITIONS[i];
         let src;
         if (item.asset) {
-          // TW: We can be 100% certain that escaping here is unnecessary
+          // TW: We can be 100% certain that escaping here is unnecessary as that function is first-party in our context
           src = item.asset.encodeDataURI();
         } else if (item.costume && item.costume.asset) {
+          // TW: We can be 100% certain that escaping here is unnecessary as that function is first-party in our context
           src = item.costume.asset.encodeDataURI();
         } else if (item.url) {
           src = soundIconHref;

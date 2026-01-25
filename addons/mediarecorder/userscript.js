@@ -407,6 +407,10 @@ export default async ({ addon, console, msg }) => {
       recordElem = Object.assign(document.createElement("div"), {
         className: "sa-record " + referenceElem.className,
         textContent: msg("record"),
+        // TW: remove title - it contains "Scratch Addons"
+        /*
+        title: msg("added-by"),
+        */
       });
       recordElem.addEventListener("click", async () => {
         if (isRecording) {

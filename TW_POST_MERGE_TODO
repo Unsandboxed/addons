@@ -1,9 +1,15 @@
-- check every addon functionality
-- check clone count full icon/color change
-- remove debugger's crazy audio engine hacks
-- editor-stage-left likely broken wrt header stuff we change
-- adjust credits to use scratch.mit.edu links
-- what is a setting-manged-by-sa
-- editor-theme3 basically just rewrite it all at this point
-- enhacned fullscreen probably broken w/ custom stage size
-- figure out what to do about remove sprite confirmation. we probably want addon back ???
+- [ ] revert/document skew
+- [ ] rewrite compiler profiler experiment in a way that we can make editor-stepping work for compiled threads :o
+- [ ] we could totally support single-stepping in compiled threads !!! if we made profiler setBlock into a yield*
+- [ ] check every addon functionality
+- [ ] check clone count full icon/color change
+- [ ] remove debugger's crazy audio engine hacks
+- [ ] editor-stage-left likely broken wrt header stuff we change
+- [ ] adjust credits to use scratch.mit.edu links
+- [ ] what is a setting-manged-by-sa
+- [ ] editor-theme3 basically just rewrite it all at this point
+- [ ] enhacned fullscreen probably broken w/ custom stage size
+- [ ] figure out what to do about remove sprite confirmation. we probably want addon back ???
+- [ ] paint-snap can we make the settings dynamic
+- [ ] look into making our no vibrations addon dynamic
+- [ ] check vol slider & mute compat

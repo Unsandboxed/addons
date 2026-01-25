@@ -56,9 +56,11 @@ export default async function ({ addon, msg }) {
           ]
         );
       }
+      // TW: add setting for more keys
       if (addon.settings.get("twKeys")) {
         keys.push(
           ...[
+            // TW: TODO: translate
             ["backspace", "backspace"],
             ["delete", "delete"],
             ["shift", "shift"],

@@ -17,5 +17,6 @@ export default async function ({ addon, console }) {
     rect.width -= 1000000000;
     return rect;
   };
+  // TW: always do a resize because we might run late
   resize();
 }

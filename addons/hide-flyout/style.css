@@ -91,7 +91,6 @@
 
 .sa-lock-button img {
   width: 20px;
-  user-select: none;
   filter: var(--editorDarkMode-accent-filter, none);
 }
 

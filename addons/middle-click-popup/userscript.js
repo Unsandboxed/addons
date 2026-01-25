@@ -69,6 +69,7 @@ export default async function ({ addon, msg, console }) {
   document.addEventListener("mousemove", (e) => {
     mousePosition = { x: e.clientX, y: e.clientY };
   });
+  // TW: TODO: upstream
   document.addEventListener("mousedown", (e) => {
     mousePosition = { x: e.clientX, y: e.clientY };
   }, { capture: true });

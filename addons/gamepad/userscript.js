@@ -161,6 +161,7 @@ export default async function ({ addon, console, msg }) {
   }
 
   const renderer = vm.runtime.renderer;
+  // TW: custom stage size
   const stageWidth = () => vm.runtime.stageWidth;
   const stageHeight = () => vm.runtime.stageHeight;
   const canvas = renderer.canvas;
@@ -175,7 +176,7 @@ export default async function ({ addon, console, msg }) {
   const buttonImage = document.createElement("img");
   buttonImage.className = addon.tab.scratchClass("stage-header_stage-button-icon");
   buttonImage.draggable = false;
-  buttonImage.src = addon.self.getResource("/gamepad.svg") /* rewritten by pull.js */;
+  buttonImage.src = addon.self.dir + "/gamepad.svg";
   buttonContent.appendChild(buttonImage);
   buttonContainer.appendChild(buttonContent);
   container.appendChild(buttonContainer);
@@ -381,6 +382,7 @@ export default async function ({ addon, console, msg }) {
   const virtualCursorSetPosition = (x, y) => {
     virtualCursorSetVisible(true);
     const CURSOR_SIZE = 6;
+    // TW: custom stage size
     const stageX = stageWidth() / 2 + x - CURSOR_SIZE / 2;
     const stageY = stageHeight() / 2 - y - CURSOR_SIZE / 2;
     virtualCursorElement.style.transform = `translate(${stageX}px, ${stageY}px)`;
@@ -394,6 +396,7 @@ export default async function ({ addon, console, msg }) {
   let getCanvasSize;
   // Support modern ResizeObserver and slow getBoundingClientRect version for improved browser support (matters for TurboWarp)
   if (window.ResizeObserver) {
+    // TW: custom stage size
     let canvasWidth = stageWidth();
     let canvasHeight = stageHeight();
     const resizeObserver = new ResizeObserver((entries) => {
@@ -421,6 +424,7 @@ export default async function ({ addon, console, msg }) {
       ...data,
       canvasWidth: rectWidth,
       canvasHeight: rectHeight,
+      // TW: custom stage size
       x: (virtualX + stageWidth() / 2) * (rectWidth / stageWidth()),
       y: (stageHeight() / 2 - virtualY) * (rectHeight / stageHeight()),
     });
@@ -434,6 +438,7 @@ export default async function ({ addon, console, msg }) {
   };
   const handleGamepadButtonDown = (e) => postKeyboardData(e.detail, true);
   const handleGamepadButtonUp = (e) => postKeyboardData(e.detail, false);
+  // TW: we allow other mouse buttons
   const handleGamepadMouseDown = (e) => {
     virtualCursorSetDown(true);
     postMouseData({
@@ -441,6 +446,7 @@ export default async function ({ addon, console, msg }) {
       button: e.detail,
     });
   };
+  // TW: we allow other mouse buttons
   const handleGamepadMouseUp = (e) => {
     virtualCursorSetDown(false);
     postMouseData({
@@ -455,6 +461,7 @@ export default async function ({ addon, console, msg }) {
     postMouseData({});
   };
 
+  // TW: custom stage size
   const updateStageSize = () => {
     gamepad.virtualCursor.maxX = renderer._xRight;
     gamepad.virtualCursor.minX = renderer._xLeft;
@@ -475,6 +482,8 @@ export default async function ({ addon, console, msg }) {
 
   while (true) {
     const target = await addon.tab.waitForElement(
+      // Full screen button
+      // TW: we changed header structure a bit
       '[class^="stage-header_stage-size-row"], [class^="stage-header_fullscreen-buttons-row_"]',
       {
         markAsSeen: true,
@@ -493,6 +502,11 @@ export default async function ({ addon, console, msg }) {
       addon.tab.appendToSharedSpace({ space: "fullscreenStageHeader", element: container, order: 0 });
     }
 
+    // TW: use native -render overlay instead of doing this manually
+    /*
+    const monitorListScaler = document.querySelector("[class^='monitor-list_monitor-list-scaler']");
+    monitorListScaler.appendChild(virtualCursorElement);
+    */
     vm.renderer.addOverlay(virtualCursorElement, "scale");
   }
 }

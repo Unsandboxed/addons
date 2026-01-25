@@ -83,6 +83,7 @@
   background-color: white;
   background-clip: padding-box;
   border-color: rgba(0, 0, 0, 0.25);
+  /* TW: unhardcode purple */
   color: var(--looks-secondary);
 }
 .sa-debugger-tabs li img {
@@ -222,6 +223,7 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  /* TW: unhardcode gray */
   border-bottom: 1px solid var(--ui-black-transparent);
   padding-left: 4px;
   font-family: monospace;
@@ -274,6 +276,7 @@
 }
 .sa-debugger-log-link:hover {
   text-decoration: underline;
+  /* TW: unhardcode purple */
   color: var(--looks-secondary);
   opacity: 1;
 }
@@ -373,7 +376,8 @@
 
 .sa-timing-header span.active-header {
   font-weight: bold;
-  color: #855cd6;
+  /* TW: unhardcode purple */
+  color: var(--looks-secondary);
 }
 
 .sa-timing-disabled {

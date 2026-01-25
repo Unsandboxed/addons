@@ -176,7 +176,7 @@ export default class DevTools {
               callback: () => {
                 let wksp = this.getWorkspace();
                 let v = wksp.getVariableMap().getVariableById(this.selVarID);
-                // prompt() returns Promise in desktop app
+                // TW: prompt() returns Promise in desktop app
                 let varName = await window.prompt(this.msg("replace", { name: v.name }));
                 if (varName) {
                   this.doReplaceVariable(this.selVarID, varName, v.type);
@@ -361,7 +361,8 @@ export default class DevTools {
     for (const block of topBlocks) {
       if (!ids.has(block.id)) {
         let mouseXYClone = { x: this.mouseXY.x, y: this.mouseXY.y };
-        block.setIntersects(true); // fixes offscreen block pasting in TurboWarp
+        // TW: fix offscreen block pasting due to our block hiding optimizations
+        block.setIntersects(true);
         let svgPath;
         if (block.pathObject)
           svgPath = block.pathObject.svgPath; // new Blockly

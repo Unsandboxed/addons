@@ -48,6 +48,92 @@
   },
   "customCssVariables": [
     {
+      "name": "inputColor-text",
+      "value": {
+        "type": "alphaThreshold",
+        "source": {
+          "type": "settingValue",
+          "settingId": "input-color"
+        },
+        "opaque": {
+          "type": "textColor",
+          "source": {
+            "type": "settingValue",
+            "settingId": "input-color"
+          }
+        },
+        "transparent": {
+          "type": "map",
+          "source": {
+            "type": "settingValue",
+            "settingId": "text"
+          },
+          "options": {
+            "white": "#ffffff",
+            "black": "#575e75",
+            "colorOnWhite": "#575e75",
+            "colorOnBlack": "#ffffff"
+          }
+        }
+      }
+    },
+    {
+      "name": "inputColor-blackText",
+      "value": {
+        "type": "alphaThreshold",
+        "source": {
+          "type": "settingValue",
+          "settingId": "input-color"
+        },
+        "opaque": {
+          "type": "textColor",
+          "black": "#000000",
+          "source": {
+            "type": "settingValue",
+            "settingId": "input-color"
+          }
+        },
+        "transparent": {
+          "type": "map",
+          "source": {
+            "type": "settingValue",
+            "settingId": "text"
+          },
+          "options": {
+            "white": "#ffffff",
+            "black": "#000000",
+            "colorOnWhite": "#000000",
+            "colorOnBlack": "#ffffff"
+          }
+        }
+      }
+    },
+    {
+      "name": "inputColor-editableLabel",
+      "value": {
+        "type": "alphaBlend",
+        "opaqueSource": {
+          "type": "map",
+          "source": {
+            "type": "settingValue",
+            "settingId": "text"
+          },
+          "options": {
+            "colorOnWhite": "#ffffff",
+            "colorOnBlack": "#282828"
+          },
+          "default": {
+            "type": "settingValue",
+            "settingId": "custom-color"
+          }
+        },
+        "transparentSource": {
+          "type": "settingValue",
+          "settingId": "input-color"
+        }
+      }
+    },
+    {
       "name": "commentText",
       "value": {
         "type": "textColor",

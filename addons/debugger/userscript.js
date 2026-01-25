@@ -38,6 +38,12 @@ export default async function ({ addon, console, msg }) {
     setPaused(true);
     setInterfaceVisible(true);
   };
+
+  addon.tab.addBlock("sa-pause", {
+    args: [],
+    callback: pause,
+    hidden: true,
+  });
   addon.tab.addBlock("\u200B\u200Bbreakpoint\u200B\u200B", {
     args: [],
     displayName: msg("block-breakpoint"),
@@ -127,6 +133,7 @@ export default async function ({ addon, console, msg }) {
     className: "sa-debugger-footer-buttons",
   });
 
+  // TW: add warning that compiler won't work as good
   const compilerWarning = document.createElement("a");
   compilerWarning.addEventListener("click", () => {
     addon.tab.redux.dispatch({
@@ -135,6 +142,7 @@ export default async function ({ addon, console, msg }) {
     });
   });
   compilerWarning.className = "sa-debugger-log sa-debugger-compiler-warning";
+  // TW: TODO: translate
   compilerWarning.textContent = "The debugger works best when the compiler is disabled.";
   const updateCompilerWarningVisibility = () => {
     compilerWarning.hidden = !vm.runtime.compilerOptions.enabled;
@@ -192,6 +200,7 @@ export default async function ({ addon, console, msg }) {
 
   interfaceHeader.append(tabListElement, buttonContainerElement);
   interfaceFooter.appendChild(footerButtonContainer);
+  // TW: append compilerWarning after interfaceHeader
   interfaceContainer.append(interfaceHeader, compilerWarning, tabContentContainer, interfaceFooter);
   document.body.append(interfaceContainer);
   moveInterface(0, 0); // necessary to initialize position if running scratch-gui locally
@@ -225,7 +234,7 @@ export default async function ({ addon, console, msg }) {
 
   const createHeaderTab = ({ text, icon }) => {
     const tab = document.createElement("li");
-    const imageElement = Object.assign(addon.tab.recolorable(), {
+    const imageElement = Object.assign(document.createElement("img"), {
       src: icon,
       draggable: false,
     });
@@ -446,6 +455,7 @@ export default async function ({ addon, console, msg }) {
     let text;
     let category;
     let shape;
+    // TW: support custom extension colors
     let color;
     if (
       block.opcode === "data_variable" ||
@@ -509,6 +519,8 @@ export default async function ({ addon, console, msg }) {
       if (!text) {
         return null;
       }
+      // jsonData.extensions is not guaranteed to exist
+      // TW: added different extension for default colors
       category = jsonData?.extensions.includes("default_extension_colors") ? "pen" : jsonData.category;
       const isStatement =
         (jsonData.extensions &&
@@ -518,9 +530,11 @@ export default async function ({ addon, console, msg }) {
         "previousStatement" in jsonData ||
         "nextStatement" in jsonData;
       shape = isStatement ? "stacked" : "round";
+      // TW: support custom extension colors
       color = jsonData.colour;
     }
 
+    // TW: support custom extensions
     if (!text) {
       return null;
     }
@@ -530,6 +544,7 @@ export default async function ({ addon, console, msg }) {
     element.textContent = text;
     element.dataset.shape = shape;
 
+    // TW: support custom extension colors
     const COLOR_CLASSES = [
       "motion",
       "looks",
@@ -675,8 +690,50 @@ export default async function ({ addon, console, msg }) {
     return ogStartHats.call(this, hat, optMatchFields, ...args);
   };
 
+  // TW: not supported in compiler so we just removed entirely for now
+  /*
+  const ogAddToList = vm.runtime._primitives.data_addtolist;
+  vm.runtime._primitives.data_addtolist = function (args, util) {
+    if (addon.settings.get("log_max_list_length")) {
+      const list = util.target.lookupOrCreateList(args.LIST.id, args.LIST.name);
+      if (list.value.length >= 200000) {
+        logsTab.addLog(msg("log-msg-list-append-too-long", { list: list.name }), util.thread, "internal-warn");
+      }
+    }
+    ogAddToList.call(this, args, util);
+  };
+
+  const ogInertAtList = vm.runtime._primitives.data_insertatlist;
+  vm.runtime._primitives.data_insertatlist = function (args, util) {
+    if (addon.settings.get("log_max_list_length")) {
+      const list = util.target.lookupOrCreateList(args.LIST.id, args.LIST.name);
+      if (list.value.length >= 200000) {
+        logsTab.addLog(msg("log-msg-list-insert-too-long", { list: list.name }), util.thread, "internal-warn");
+      }
+    }
+    ogInertAtList.call(this, args, util);
+  };
+
+  const ogSetVariableTo = vm.runtime._primitives.data_setvariableto;
+  vm.runtime._primitives.data_setvariableto = function (args, util) {
+    if (addon.settings.get("log_invalid_cloud_data")) {
+      const variable = util.target.lookupOrCreateVariable(args.VARIABLE.id, args.VARIABLE.name);
+      if (variable.isCloud) {
+        const value = args.VALUE.toString();
+        if (isNaN(value)) {
+          logsTab.addLog(msg("log-cloud-data-nan", { var: variable.name }), util.thread, "internal-warn");
+        } else if (value.length > 256) {
+          logsTab.addLog(msg("log-cloud-data-too-long", { var: variable.name }), util.thread, "internal-warn");
+        }
+      }
+    }
+    ogSetVariableTo.call(this, args, util);
+  };
+  */
+
   while (true) {
     await addon.tab.waitForElement(
+      // TW: changed structure of header
       '[class^="stage-header_stage-size-row"], [class^="stage-header_fullscreen-buttons-row_"]',
       {
         markAsSeen: true,

@@ -1,8 +1,14 @@
 import { onPauseChanged, isPaused } from "./module.js";
+// TW: import chartjs as module
 import "../../libraries/thirdparty/cs/chart.min.js";
 
 export default async function createPerformanceTab({ debug, addon, console, msg }) {
   const vm = addon.tab.traps.vm;
+
+  // TW: chartjs is now imported as module
+  /*
+  await addon.tab.loadScript("/libraries/thirdparty/cs/chart.min.js");
+  */
 
   // In optimized graphs everything still looks good
   const fancyGraphs = addon.settings.get("fancy_graphs");
@@ -23,7 +29,7 @@ export default async function createPerformanceTab({ debug, addon, console, msg 
 
   const tab = debug.createHeaderTab({
     text: msg("tab-performance"),
-    icon: addon.self.getResource("/icons/performance.svg") /* rewritten by pull.js */,
+    icon: addon.self.dir + "/icons/performance.svg",
   });
 
   const content = Object.assign(document.createElement("div"), {
@@ -45,7 +51,8 @@ export default async function createPerformanceTab({ debug, addon, console, msg 
 
   const now = () => performance.now();
 
-  // We'll guess that requestAnimationFrame is probably 60, but even if it's not, it's not a big deal.
+  // TW: If FPS=0, that means we use rAF. We'll guess that requestAnimationFrame runs at 60Hz as it does in most places.
+  // TW: but, we changed max to suggestedMax later on, so if we're wrong, that's OK
   const getMaxFps = () => vm.runtime.frameLoop.framerate === 0 ? 60 : vm.runtime.frameLoop.framerate;
 
   const NUMBER_OF_POINTS = 20;
@@ -76,6 +83,7 @@ export default async function createPerformanceTab({ debug, addon, console, msg 
           ...scaleColorOptions,
         },
         y: {
+          // TW: this is a suggested max due to FPS=0 using rAF case
           suggestedMax: getMaxFps(),
           min: 0,
           ...scaleColorOptions,
@@ -118,6 +126,7 @@ export default async function createPerformanceTab({ debug, addon, console, msg 
           ...scaleColorOptions,
         },
         y: {
+          // TW: this is a suggested max due to FPS=0 using rAF case
           suggestedMax: 300,
           min: 0,
           ...scaleColorOptions,
@@ -161,6 +170,7 @@ export default async function createPerformanceTab({ debug, addon, console, msg 
       fpsData.shift();
       fpsData.push(Math.min(renderTimes.length, maxFps));
       // Incase we switch between 30FPS and 60FPS, update the max height of the chart.
+      // TW: this is a suggested max due to FPS=0 using rAF case
       fpsChart.options.scales.y.suggestedMax = maxFps;
 
       const clonesData = performanceClonesChart.data.datasets[0].data;

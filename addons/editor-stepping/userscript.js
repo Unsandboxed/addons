@@ -19,6 +19,7 @@ export default async function ({ addon, console }) {
     if (!addon.self.disabled) {
       const runningThread = getRunningThread();
       const threads = vm.runtime.threads.filter(
+        // TW: never highlight in compiled threads, it won't work
         (thread) => thread !== runningThread && !thread.target.blocks.forceNoGlow && !thread.isCompiled
       );
       highlighter.setGlowingThreads(threads);

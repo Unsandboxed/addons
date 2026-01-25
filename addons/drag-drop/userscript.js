@@ -67,7 +67,13 @@ export default async function ({ addon, console }) {
         fileInput.files = files;
         fileInput.dispatchEvent(new Event("change", { bubbles: true }));
       };
-    } else if ((el = e.target.closest('div[class*="monitor_list-monitor"]'))) {
+    } else if (
+      // TW: allow dropping into monitors outside of editor
+      /*
+      !addon.tab.redux.state.scratchGui.mode.isPlayerOnly &&
+      */
+      (el = e.target.closest('div[class*="monitor_list-monitor"]'))
+    ) {
       callback = (files) => {
         const contextMenuBefore = document.querySelector("body > .react-contextmenu.react-contextmenu--visible");
         // Simulate a right click on the list monitor

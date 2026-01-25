@@ -12,64 +12,63 @@ const myBlocksCategory = {
   colorId: "more",
 };
 const extensionsCategory = {
-  categoryId: null,
+  id: null,
   settingId: "Pen-color",
   colorId: "pen",
 };
 const saCategory = {
-  categoryId: null,
   settingId: "sa-color",
-  colorId: "addons",
+  colorId: "sa",
 };
 const categories = [
   {
-    categoryId: "motion",
+    id: "motion",
     settingId: "motion-color",
     colorId: "motion",
   },
   {
-    categoryId: "looks",
+    id: "looks",
     settingId: "looks-color",
     colorId: "looks",
   },
   {
-    categoryId: "sound",
+    id: "sound",
     settingId: "sounds-color",
     colorId: "sounds",
   },
   {
-    categoryId: "events",
+    id: "events",
     settingId: "events-color",
     colorId: "event",
   },
   {
-    categoryId: "control",
+    id: "control",
     settingId: "control-color",
     colorId: "control",
   },
   {
-    categoryId: "sensing",
+    id: "sensing",
     settingId: "sensing-color",
     colorId: "sensing",
   },
   {
-    categoryId: "operators",
+    id: "operators",
     settingId: "operators-color",
     colorId: "operators",
   },
   {
-    categoryId: "variables",
+    id: "variables",
     settingId: "data-color",
     colorId: "data",
   },
   {
-    categoryId: "lists",
+    id: "lists",
     settingId: "data-lists-color",
     colorId: "data_lists",
   },
   myBlocksCategory,
   extensionsCategory,
-  saCategory
+  saCategory,
 ];
 
 // From https://github.com/scratchfoundation/scratch-gui/blob/782fa44/src/lib/themes/default/index.js
@@ -316,21 +315,13 @@ export default async function ({ addon, console, msg }) {
       }
       return block.getColourTertiary();
     }
-    return quaternaryColor(object);
+    if (isColoredTextMode())
+      return alphaBlend(primaryColor(category), multiply(addon.settings.get(category.settingId), { a: 0.25 }));
+    if (textMode() === "black") return brighten(primaryColor(category), { r: 0.4, g: 0.4, b: 0.4 });
+    return tertiaryColor(category);
   };
-
-  const uncoloredTextColor = () => {
-    if (textMode() === 'white' || textMode() === 'colorOnBlack') return '#ffffff';
-    if (textMode() === 'black' || textMode() === 'colorOnWhite') return '#000000';
-    throw new Error(`unknown text mode: ${textMode()}`);
-  };
-
-  const textFieldText = () => {
-    const black = textMode() === 'black' ? '#000000' : undefined;
-    return textColor(addon.settings.get("input-color"), black);
-  };
-
-  const fieldTextColor = (field) => {
+  const textColor = (field) => {
+    if (addon.self.disabled) return originalColors.text;
     if (textMode() === "white") return "#ffffff";
     if (textMode() === "black") return "#000000";
     if (field) {
@@ -344,12 +335,19 @@ export default async function ({ addon, console, msg }) {
     }
     return "#000000";
   };
-
-  const categoryIconBackground = (primary) => isColoredTextMode() ? quaternaryColor(primary) : primaryColor(primary);
-  const categoryIconBorder = (primary) => tertiaryColor(primary);
-
-  const useBlackIcons = () => textMode() === 'black' || textMode() === 'colorOnWhite';
-  const iconPath = () => `/icons/${useBlackIcons() ? "black_text" : "white_text"}`;
+  const otherColor = (settingId, colorId) => {
+    if (addon.self.disabled) return originalColors[colorId];
+    return addon.settings.get(settingId);
+  };
+  const useBlackIcons = () => {
+    return {
+      white: false,
+      black: true,
+      colorOnWhite: true,
+      colorOnBlack: false,
+    }[textMode()];
+  };
+  const iconPath = () => `${addon.self.dir}/icons/${useBlackIcons() ? "black_text" : "white_text"}`;
 
   const makeDropdownArrow = (color) => {
     let createSvgElement;
@@ -680,10 +678,9 @@ export default async function ({ addon, console, msg }) {
       const iconsToReplace = ["repeat.svg", "rotate-left.svg", "rotate-right.svg"];
       const iconName = src.split("/")[src.split("/").length - 1];
       if (iconsToReplace.includes(iconName)) {
-        src = addon.self.getResource(`${iconPath()}/${iconName}`);
+        src = `${iconPath()}/${iconName}`;
       }
     }
-
     return oldFieldImageSetValue.call(this, src);
   };
 

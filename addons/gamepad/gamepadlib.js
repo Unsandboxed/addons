@@ -14,6 +14,7 @@ The high/low distinction is necessary for axes. Buttons will only use high
 
 type: "mousedown" maps a button to control whether the mouse is down or not
 deadZone: 0.5 controls the minimum value to trigger a mousedown
+// TW: allow other mouse buttons
 button: 0, 1, 2, etc. controls which button to press
 
 type: "virtual_cursor" maps a button to control the "virtual cursor"
@@ -96,6 +97,7 @@ const transformAndCopyMapping = (mapping) => {
     if (typeof copy.deadZone === "undefined") {
       copy.deadZone = 0.5;
     }
+    // TW: allow other mouse buttons
     if (typeof copy.button === "undefined") {
       copy.button = 0;
     }
@@ -431,6 +433,7 @@ class GamepadLib extends EventTarget {
     this.keysPressedThisFrame = new Set();
     this.oldKeysPressed = new Set();
 
+    // TW: allow other mouse buttons
     this.mouseButtonsPressedThisFrame = new Set();
     this.oldMouseDown = new Set();
 
@@ -515,6 +518,7 @@ class GamepadLib extends EventTarget {
     }
   }
 
+  // TW: allow other mouse buttons
   dispatchMouse(button, down) {
     if (down) {
       this.dispatchEvent(new CustomEvent("mousedown", { detail: button }));
@@ -541,6 +545,7 @@ class GamepadLib extends EventTarget {
     } else if (mapping.type === "mousedown") {
       const isDown = Math.abs(value) >= mapping.deadZone;
       if (isDown) {
+        // TW: allow other mouse buttons
         this.mouseButtonsPressedThisFrame.add(mapping.button);
       }
     } else if (mapping.type === "virtual_cursor") {
@@ -568,9 +573,10 @@ class GamepadLib extends EventTarget {
 
   update(time) {
     this.oldKeysPressed = this.keysPressedThisFrame;
+    // TW: allow other mouse buttons
     this.oldMouseButtonsPressed = this.mouseButtonsPressedThisFrame;
-    this.keysPressedThisFrame = new Set();
     this.mouseButtonsPressedThisFrame = new Set();
+    this.keysPressedThisFrame = new Set();
 
     if (this.currentTime === null) {
       this.deltaTime = 0; // doesn't matter what this is, it's just the first frame
@@ -620,6 +626,7 @@ class GamepadLib extends EventTarget {
       }
     }
 
+    // TW: allow other mouse buttons
     for (const button of this.mouseButtonsPressedThisFrame) {
       if (!this.oldMouseButtonsPressed.has(button)) {
         this.dispatchMouse(button, true);
@@ -767,10 +774,11 @@ class GamepadEditor extends EventTarget {
     if (key === "ArrowLeft") return this.msg("key-left");
     if (key === "ArrowRight") return this.msg("key-right");
     if (key === "Enter") return this.msg("key-enter");
+    // TW: support more keys
     if (key.length === 1) {
       return key.toUpperCase();
     }
-    // Convert eg. "PageUp" -> "Page Up"
+    // TW: Convert eg. "PageUp" -> "Page Up"
     return key.replace(/[a-z]([A-Z])/, (n) => `${n[0]} ${n[1]}`)
   }
 
@@ -792,6 +800,7 @@ class GamepadEditor extends EventTarget {
           input.value = this.keyToString(mapping[property]);
         }
       } else if (mapping.type === "mousedown") {
+        // TW: allow other mouse buttons
         let value = this.msg("key-click");
         if (mapping.button !== 0) {
           value += ` (${mapping.button})`;
@@ -820,6 +829,7 @@ class GamepadEditor extends EventTarget {
         if (allowClick) {
           const mapping = mappingList[index];
           mapping.type = "mousedown";
+          // TW: allow other mouse buttons
           mapping.button = e.button;
           changedMapping();
         } else {
@@ -841,13 +851,13 @@ class GamepadEditor extends EventTarget {
           return;
         }
         const mapping = mappingList[index];
+        // TW: support more keys
         const KEYS = [
           "ArrowUp",
           "ArrowDown",
           "ArrowRight",
           "ArrowLeft",
           "Enter",
-          // TW: We support more keys
           // "Backspace",
           // "Delete",
           "Shift",
@@ -875,11 +885,12 @@ class GamepadEditor extends EventTarget {
       }
     };
 
+    // TW: need to ignore shift/control on way down as that may be an intermediate step
+    // TW: when trying to get to shift+something
     const MODIFIER_KEYS = ["Shift", "Control"];
     const handleKeyDown = (e) => {
       if (!MODIFIER_KEYS.includes(e.key)) handleKeyEvent(e);
     };
-
     const handleKeyUp = (e) => {
       if (MODIFIER_KEYS.includes(e.key)) handleKeyEvent(e);
     };
@@ -892,13 +903,13 @@ class GamepadEditor extends EventTarget {
       }
     };
 
+    // TW: disable contextmenu so we get right click event
     input.addEventListener("contextmenu", (e) => {
       e.preventDefault();
     });
-
     input.addEventListener("mouseup", handleClick);
-    input.addEventListener("keydown", handleKeyDown);
     input.addEventListener("keyup", handleKeyUp);
+    input.addEventListener("keydown", handleKeyDown);
     input.addEventListener("blur", handleBlur);
     update();
 

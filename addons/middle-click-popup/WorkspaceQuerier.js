@@ -1110,6 +1110,7 @@ class QueryInfo {
     /** @type {WorkspaceQuerier} */
     this.querier = querier;
     /** @type {string} The query */
+    // TW: avoid replaceAll for browser compatibility reasons
     this.str = query.replace(/\u00a0/g, " ");
     /** @type {string} A lowercase version of the query. Used for case insensitive comparisons. */
     this.lowercase = this.str.toLowerCase();

@@ -48,7 +48,7 @@
           "type": "settingValue",
           "settingId": "upscale"
         },
-        "true": "var(--ui-white)",
+        "true": "white",
         "false": "transparent"
       }
     }

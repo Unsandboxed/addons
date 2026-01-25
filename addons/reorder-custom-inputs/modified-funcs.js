@@ -49,6 +49,7 @@ export function modifiedCreateAllInputs(connectionMap) {
   }
 
   // remove all traces of %l at the earliest possible time
+  // TW: avoid replaceAll for browser support reasons
   this.procCode_ = this.procCode_.replace(/%l /g, "");
 }
 

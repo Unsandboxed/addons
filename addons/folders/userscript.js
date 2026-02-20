@@ -1,10 +1,5 @@
 import { escapeHTML } from "../../libraries/common/cs/autoescaper.js";
-import {
-  getSortableHOCFromElement,
-  verifySortableHOC,
-  setReactInternalKey,
-  getReactInternalKey,
-} from "../../libraries/common/cs/patch-SortableHOC.js";
+import { getSortableHOCFromElement, verifySortableHOC, setReactInternalKey, getReactInternalKey } from "../../libraries/common/cs/patch-SortableHOC.js";
 
 const DIVIDER = "//";
 

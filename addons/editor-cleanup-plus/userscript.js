@@ -1,9 +1,5 @@
 import UndoGroup from "../../libraries/common/cs/UndoGroup.js";
-import {
-  getVariableUsesById,
-  getOrderedTopBlockColumns,
-  autoPositionComment,
-} from "../../libraries/common/cs/devtools-utils.js";
+import { getVariableUsesById, getOrderedTopBlockColumns, autoPositionComment } from "../../libraries/common/cs/devtools-utils.js";
 
 export default async function ({ addon, console, msg, safeMsg: m }) {
   const blockly = await addon.tab.traps.getBlockly();

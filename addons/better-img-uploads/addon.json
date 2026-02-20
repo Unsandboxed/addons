@@ -63,5 +63,6 @@
       ],
       "default": "fit"
     }
-  ]
+  ],
+  "libraries": ["scratch-gui"]
 }

@@ -10,6 +10,7 @@
     }
   ],
   "tags": ["editor", "codeEditor", "theme"],
+  "relatedAddons": ["custom-block-shape"],
   "userscripts": [
     {
       "url": "userscript.js",

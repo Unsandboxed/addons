@@ -24,5 +24,6 @@
   "versionAdded": "1.0.0",
   "tags": ["editor", "codeEditor", "recommended"],
   "enabledByDefault": true,
-  "enabledByDefaultMobile": false
+  "enabledByDefaultMobile": false,
+  "libraries": ["scratch-blocks"]
 }

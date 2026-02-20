@@ -1,0 +1,8 @@
+/.github/ @Hans5958
+# /addons/addons.json @WorldLanguages  # New addons
+/addon-api @WorldLanguages
+/background @WorldLanguages
+/content-scripts @WorldLanguages
+/libraries @WorldLanguages
+manifest.json @WorldLanguages
+README.md @WorldLanguages

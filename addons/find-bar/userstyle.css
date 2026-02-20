@@ -10,8 +10,7 @@
   margin-left: 1em;
 }
 .sa-find-bar[hidden] {
-  /* !important to override displayNoneWhileDisabled */
-  display: none !important;
+  display: none;
 }
 
 .sa-find-wrapper {
@@ -39,8 +38,7 @@
   position: absolute;
   width: 16em;
   box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.3);
-  background-color: var(--ui-modal-background);
-  outline: 1px solid var(--ui-black-transparent);
+  background-color: white;
 }
 
 /* We need to modify Scratch styles so that the place where the find bar is injected */
@@ -64,7 +62,7 @@
   padding-left: 0.4em;
 }
 
-.sa-find-input:focus {
+input.sa-find-input:focus /* must be specific enough to override editor-dark-mode */ {
   /* Change Scratch default styles */
   box-shadow: none;
 }

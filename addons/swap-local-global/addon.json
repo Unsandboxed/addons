@@ -17,6 +17,10 @@
     {
       "url": "style.css",
       "matches": ["projects"]
+    },
+    {
+      "url": "../../libraries/common/cs/blockly-menu-separators.css",
+      "matches": ["projects"]
     }
   ],
   "tags": ["editor", "codeEditor", "featured"],

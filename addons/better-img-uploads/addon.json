@@ -39,6 +39,10 @@
     {
       "url": "style.css",
       "matches": ["projects"]
+    },
+    {
+      "url": "../../libraries/common/cs/react-tooltip.css",
+      "matches": ["projects"]
     }
   ],
   "settings": [

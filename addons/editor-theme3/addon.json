@@ -227,6 +227,10 @@
       "matches": ["projects"]
     },
     {
+      "url": "../../libraries/common/cs/setting-managed-by-sa.css",
+      "matches": ["projects"]
+    }
+    {
       "url": "black_text.css",
       "matches": ["projects"],
       "if": {
@@ -655,5 +659,5 @@
     "type": "palette",
     "colors": ["motion-color", "looks-color", "sounds-color", "events-color", "control-color", "sensing-color"]
   },
-  "libraries": ["scratch-www", "scratch-gui", "scratch-blocks"]
+  "libraries": ["scratch-www", "scratch-gui", "scratch-blocks", "../../libraries/common/cs/setting-managed-by-sa.js"]
 }

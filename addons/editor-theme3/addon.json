@@ -229,7 +229,7 @@
     {
       "url": "../../libraries/common/cs/setting-managed-by-sa.css",
       "matches": ["projects"]
-    }
+    },
     {
       "url": "black_text.css",
       "matches": ["projects"],

@@ -21,7 +21,7 @@ export default async function ({ addon, console, msg }) {
     `;
     for (let scratchStyle of document.querySelectorAll(`
       style[id^='blockly-'],
-      .scratch-addons-style[data-addon-id="editor-theme3"],
+      .scratch-addons-style[data-addons*="editor-theme3"],
       .sa-custom-block-text-style
     `)) {
       if (scratchStyle.disabled) continue;

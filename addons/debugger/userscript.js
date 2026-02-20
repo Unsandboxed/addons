@@ -280,7 +280,7 @@ export default async function ({ addon, console, msg }) {
   closeButton.appendChild(
     Object.assign(document.createElement("img"), {
       className: addon.tab.scratchClass("close-button_close-icon"),
-      src: import.meta.url + "/../../../images/cs/close-s3.svg",
+      src: "../../images/cs/close-s3.svg",
       draggable: false,
     })
   );

@@ -173,7 +173,7 @@ export default class DevTools {
             {
               enabled: true,
               text: this.m("swap", { var: block.type.includes("list") ? this.m("lists") : this.m("variables") }),
-              callback: () => {
+              callback: async () => {
                 let wksp = this.getWorkspace();
                 let v = wksp.getVariableMap().getVariableById(this.selVarID);
                 // TW: prompt() returns Promise in desktop app

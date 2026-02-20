@@ -1,4 +1,4 @@
-@import url("../editor-theme3/compatibility.css");
+@import url("%addon-self-dir%/../editor-theme3/compatibility.css");
 
 .sa-find-bar {
   display: flex;

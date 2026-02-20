@@ -1,4 +1,4 @@
-@import url("../../libraries/common/cs/react-tooltip.css");
+@import url("%addon-self-dir%/../../libraries/common/cs/react-tooltip.css");
 
 [data-for*="HD Upload"]:hover + .__react_component_tooltip {
   visibility: visible;

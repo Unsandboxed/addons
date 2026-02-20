@@ -1,5 +1,5 @@
-@import url("../../libraries/common/cs/blockly-menu-separators.css");
-@import url("../../libraries/common/cs/spinner.css");
+@import url("%addon-self-dir%/../../libraries/common/cs/blockly-menu-separators.css");
+@import url("%addon-self-dir%/../../libraries/common/cs/spinner.css");
 
 .sa-export-container {
   box-sizing: border-box;

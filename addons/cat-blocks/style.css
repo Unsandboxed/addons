@@ -1,4 +1,4 @@
-@import url("../../libraries/common/cs/setting-managed-by-sa.css");
+@import url("%addon-self-dir%/../../libraries/common/cs/setting-managed-by-sa.css");
 
 .sa-theme-submenu li:not(:last-child, :nth-last-child(2)) {
   filter: opacity(0.5) grayscale(1);

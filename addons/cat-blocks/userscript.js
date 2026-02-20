@@ -512,7 +512,7 @@ export default async function ({ addon, console, msg }) {
       closeContainer.appendChild(closeButton);
       const closeIcon = Object.assign(document.createElement("img"), {
         className: addon.tab.scratchClass("close-button_close-icon"),
-        src: addon.self.dir + "/../../images/cs/close-s3.svg",
+        src: addon.self.dir + "/icons/close-s3.svg",
         draggable: false,
       });
       closeButton.appendChild(closeIcon);
